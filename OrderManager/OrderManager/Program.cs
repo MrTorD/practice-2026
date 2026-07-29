@@ -44,6 +44,7 @@ string RequestStringWithRestriction( string requestMessage, Func<string, bool> r
     Console.WriteLine( requestMessage );
 
     var input = Console.ReadLine() ?? "";
+
     while ( restriction( input ) )
     {
         Console.WriteLine( "Ошибка, введите корректное значение" );

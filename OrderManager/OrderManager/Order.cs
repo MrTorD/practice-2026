@@ -22,12 +22,14 @@ internal class Order
             ? throw new ArgumentException( "UserName не может быть пустым" )
             : value;
     }
+
     public required string Address
     {
         get; set => field = string.IsNullOrEmpty( value )
             ? throw new ArgumentException( "Address не может быть пустым" )
             : value;
     }
+
     public OrderStatus Status { get; set; } = OrderStatus.Draft;
 
     public required DateTime DeliveryDate { get; set; }
