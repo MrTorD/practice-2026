@@ -1,7 +1,7 @@
 ﻿using OrderManager;
 
-HashSet<string> CONFIRMATION_RESPONSES = [ "yes", "y" ];
-const int DELIVERY_DURATION_IN_DAYS = 3;
+HashSet<string> ConfirmationResponses = [ "yes", "y" ];
+const int DeliveryDurationInDays = 3;
 
 var order = RequestOrder( "Оформление заказа" );
 bool isConfirmed = RequestConfirmation( order );
@@ -18,16 +18,16 @@ Order RequestOrder( string requestMessage )
 
     var name = RequestStringWithRestriction( "Введите название товара", s => string.IsNullOrWhiteSpace( s ) );
     var count = RequestIntWithRestriction( "Введите количество товара", num => num <= 0 );
-    var userName = RequestStringWithRestriction( "Введите имя пользователя", s => string.IsNullOrWhiteSpace( s ) );
+    var username = RequestStringWithRestriction( "Введите имя пользователя", s => string.IsNullOrWhiteSpace( s ) );
     var address = RequestStringWithRestriction( "Введите адрес", s => string.IsNullOrWhiteSpace( s ) );
 
     return new Order
     {
         Name = name,
         Count = count,
-        UserName = userName,
+        Username = username,
         Address = address,
-        DeliveryDate = DateTime.Now.AddDays( DELIVERY_DURATION_IN_DAYS )
+        DeliveryDate = DateTime.UtcNow.AddDays( DeliveryDurationInDays )
     };
 }
 
@@ -36,7 +36,7 @@ bool RequestConfirmation( Order order )
     Console.WriteLine( $"Подтвердите заказ {order.Name}, количеством {order.Count} на адрес {order.Address}" );
     var answer = Console.ReadLine() ?? "";
 
-    return CONFIRMATION_RESPONSES.Contains( answer.ToLower() );
+    return ConfirmationResponses.Contains( answer.ToLower() );
 }
 
 string RequestStringWithRestriction( string requestMessage, Func<string, bool> restriction )
@@ -60,6 +60,7 @@ int RequestIntWithRestriction( string requestMessage, Func<int, bool> restrictio
     Console.WriteLine( requestMessage );
 
     var input = Console.ReadLine() ?? "";
+
     int value;
 
     while ( !int.TryParse( input, out value ) || restriction( value ) )

@@ -4,7 +4,7 @@ internal class Order
 {
     public required string Name
     {
-        get; set => field = string.IsNullOrEmpty( value )
+        get; set => field = string.IsNullOrWhiteSpace( value )
             ? throw new ArgumentException( "Name не может быть пустым" )
             : value;
     }
@@ -16,16 +16,16 @@ internal class Order
             : value;
     }
 
-    public required string UserName
+    public required string Username
     {
-        get; set => field = string.IsNullOrEmpty( value )
-            ? throw new ArgumentException( "UserName не может быть пустым" )
+        get; set => field = string.IsNullOrWhiteSpace( value )
+            ? throw new ArgumentException( "Username не может быть пустым" )
             : value;
     }
 
     public required string Address
     {
-        get; set => field = string.IsNullOrEmpty( value )
+        get; set => field = string.IsNullOrWhiteSpace( value )
             ? throw new ArgumentException( "Address не может быть пустым" )
             : value;
     }
